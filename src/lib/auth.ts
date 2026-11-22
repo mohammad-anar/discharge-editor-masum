@@ -9,11 +9,17 @@ const JWT_SECRET = new TextEncoder().encode(JWT_SECRET_STRING);
 export const COOKIE_NAME = "auth_session";
 
 export async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, 10);
+  // Store raw password directly as requested
+  return password;
 }
 
 export async function verifyPassword(password: string, hash: string): Promise<boolean> {
-  return bcrypt.compare(password, hash);
+  if (password === hash) return true;
+  try {
+    return await bcrypt.compare(password, hash);
+  } catch {
+    return false;
+  }
 }
 
 export async function createSessionToken(user: AuthUser): Promise<string> {
