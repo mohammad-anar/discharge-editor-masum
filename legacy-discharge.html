@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discharge Certificate Generator v2</title>
+<style>
+:root{--bg:#e5e7eb;--bar:#fff;--fg:#111;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f2024;--bar:#2b2c31;--fg:#eee}}
+:root[data-theme="dark"]{--bg:#1f2024;--bar:#2b2c31;--fg:#eee}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:13px system-ui,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);padding:7px 10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #8884}
+.bar button,.bar select,.bar input,.ctl button,.ctl select{font:12px system-ui;padding:3px 7px;color:inherit;background:transparent;border:1px solid #8886;border-radius:5px;cursor:pointer}
+.bar input{cursor:text;width:120px}.bar #top{width:52px}
+#bm{background:#2563eb;color:#fff;border-color:#2563eb}
+.wrap{padding:14px 0 40px;overflow-x:auto}
+.pg,#ms{--cons:Constantia,"Palatino Linotype",Georgia,serif;--cam:Cambria,Caladea,Georgia,serif;--syl:Sylfaen,Georgia,serif;--tnr:"Times New Roman","Liberation Serif",serif;--alg:Algerian,"Copperplate Gothic Bold",Impact,serif;--nir:"Nirmala UI","Noto Sans Bengali","Hind Siliguri",sans-serif;--blk:"Arial Black","Archivo Black",Impact,sans-serif}
+.pg{position:relative;width:612pt;height:835.2pt;background:#fff;color:#000;margin:0 auto 18px;box-shadow:0 2px 12px #0004;overflow:hidden}
+.pg *,#ms *{box-sizing:border-box}
+#ms{position:absolute;left:-9999px;top:0;width:522pt;visibility:hidden}
+.a{position:absolute;white-space:nowrap;line-height:1.15}.blk{position:absolute;left:45pt;width:522pt}
+#pvbar{display:none;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);padding:7px 10px;gap:8px;align-items:center;border-bottom:1px solid #8884}
+.pv .bar{display:none}.pv #pvbar{display:flex}.pv .ph{visibility:hidden}
+#pvbar button{font:12px system-ui;padding:4px 11px;color:inherit;background:transparent;border:1px solid #8886;border-radius:5px;cursor:pointer}#pvp{background:#2563eb!important;color:#fff!important;border-color:#2563eb!important}
+@media print{#pvbar{display:none!important}}
+.ph{opacity:.3}@media print{.ph{visibility:hidden}}
+.dw{display:none}.edit .dw{display:inline-block;position:relative;width:0;height:0}.db{position:absolute;left:3px;top:-12px;font:10px/14px system-ui;padding:0 3px;border:1px solid #8886;border-radius:3px;background:#fff;color:#111;cursor:pointer}
+.edit .dt{cursor:pointer;outline:1px dashed #f59e0baa}
+#pop{display:none;position:fixed;z-index:40;width:260px;background:var(--bar);color:var(--fg);border:1px solid #8886;border-radius:8px;box-shadow:0 6px 20px #0005;padding:6px;font:13px system-ui}
+#pop input{width:100%;padding:5px 8px;margin-bottom:4px;font:13px system-ui;color:inherit;background:transparent;border:1px solid #8886;border-radius:5px}
+#pl{max-height:190px;overflow:auto}#pl div{padding:5px 8px;cursor:pointer;border-radius:4px}#pl div:hover{background:#2563eb;color:#fff}
+#pa{margin-top:4px;display:flex;gap:6px}#pa input{margin:0}#pa button{flex:1;padding:5px;border:1px solid #8886;border-radius:5px;background:transparent;color:inherit;cursor:pointer}
+#lg{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;align-items:center;justify-content:center}
+#lg .card{background:var(--bar);color:var(--fg);padding:22px;border-radius:12px;display:flex;flex-direction:column;gap:10px;width:300px;box-shadow:0 8px 30px #0004}
+#lg input,#lg button{padding:8px;font:14px system-ui;border:1px solid #8886;border-radius:6px;background:transparent;color:inherit}#lg button{background:#2563eb;color:#fff;cursor:pointer}
+@media print{#pop,#lg{display:none!important}}
+.gd{position:absolute;inset:0;pointer-events:none;display:none;z-index:9}.guides .gd{display:block}.gd i{position:absolute;background:#e11d48aa}
+.title{left:177pt;width:264pt;height:33pt;border:1pt solid #000;font:17pt/31pt var(--blk);text-align:center}
+.box{border:1.4pt dotted #000;border-radius:8pt}
+.lab{font:11pt var(--cons)}.col{font:bold 12pt "Arial Narrow",Arial,sans-serif}.val{font:bold 12pt var(--syl)}
+.h{display:block;font:12pt/13.2pt var(--alg);text-decoration:underline;text-underline-offset:2pt}
+.r{display:flex;margin-bottom:.85pt}.r .l{flex:0 0 99.9pt;font:bold 11pt/12.65pt var(--cons)}.r .c{flex:0 0 13.5pt;font:bold 9.5pt/12.65pt Helvetica,Arial,sans-serif}.r .v{flex:1;font:bold 11pt/12.65pt var(--tnr)}.r .v.k{font-family:var(--cons)}
+.ld{flex:1;border-bottom:1.2pt dotted #000;height:.75em;margin:0 3pt}
+.note{font:11pt var(--nir)}.u{font:bold 11pt var(--cam),var(--nir);font-family:var(--cam),var(--nir)}
+.hd{font:bold 12pt/14pt var(--nir)}
+.li{position:relative;padding-left:36pt;font:9pt/14pt var(--nir);min-height:14pt}.li svg{position:absolute;left:17.6pt;top:3.5pt;width:7pt;height:7pt}
+.ft{font:11pt var(--syl)}
+.ctl{display:none;position:absolute;z-index:8;gap:2px}.edit .ctl{display:flex}
+.ctl.sec{right:0;top:-24px}.ctl.row{left:100%;margin-left:6pt;top:0}.ctl button,.ctl select{padding:0 5px;background:#fff;color:#111}
+.edit .f{outline:1px dashed #3b82f688;border-radius:2px}.edit .f:empty{background:#3b82f622;padding:0 12pt}.edit .f:empty::before{content:"\200b"}
+#dd{display:none;position:fixed;z-index:30;background:var(--bar);border:1px solid #8886;border-radius:6px;max-height:200px;overflow:auto;box-shadow:0 4px 14px #0004}
+#dd div{padding:5px 10px;cursor:pointer}#dd div:hover{background:#2563eb;color:#fff}
+@media print{@page{size:612pt 835.2pt;margin:0}body{background:#fff}.bar,.ctl,.gd,#dd{display:none!important}.wrap{padding:0;zoom:1!important}.pg{margin:0;box-shadow:none;break-after:page}}
+</style>
+</head>
+<body>
+<div class="bar">
+ <button id="bm"></button>
+ <label>Top px <input id="top" type="number" value="280"></label>
+ <label>Bill No <input id="bill" placeholder="Bill number"></label>
+ <select id="addT"><option value="">+ Section</option></select>
+ <input id="tn" placeholder="Template name">
+ <input id="dn" placeholder="Document name">
+ <button id="sd">💾 Save Doc</button><select id="od"></select><button id="nw">New</button><button id="pr">👁 Print Preview</button><button id="lo">Logout</button>
+ <label><input type="checkbox" id="gd" style="width:auto"> Guides</label><span id="st" style="opacity:.8"></span>
+</div>
+<div id="pvbar"><button id="pvb">← Back</button><button id="pvp">🖨 Print</button><button id="pvd">⬇ HTML</button><span id="pvm" style="opacity:.8">Print Preview</span></div>
+<div class="wrap" id="wrap"></div><div id="ms" class="pg"></div><div id="dd"></div><div id="pop"></div>
+<div id="lg"><div class="card"><h3 style="margin:0">Login</h3><input id="le" placeholder="Email"><input id="lp" type="password" placeholder="Password"><button id="lgb">Login</button><div id="lm" style="color:#e11d48"></div><small style="opacity:.7">Demo login (client-side). আসল JWT + database login backend ফাইলে আছে।</small></div></div>
+<script>
+const $=s=>document.querySelector(s),L=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},Sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const GAP=8; /* extra gap between sections (pt ≈ 10.7px) */
+const uid=()=>Math.random().toString(36).slice(2,8),esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const DEF={pi:()=>({no:"",dd:"",name:"",ad:"",gender:"",age:"",cabin:"",guardian:"",rel:"",addr:"",mobile:""}),ot:()=>({time:"",date:"",ind:"",op:"",surg:"",asst:"",anes:"",child:""}),birth:()=>({birth:"",baby:"",sex:"",weight:"",inv:"(All Report Supplied with the Patient)."}),rx:()=>({items:[{m:"",d:"",n:"",u:""}]}),advice:()=>({items:[""]}),services:()=>({items:[""]})};
+const NM={pi:"Patient Info",ot:"O.T Note",birth:"Birth Table + Investigation",rx:"Treatment on Discharge",advice:"উপদেশ",services:"আমাদের সেবা-সমূহ"};
+const MED=["Tab. Anulid_600 mg.","Cap. Inclox_500mg.","Cap. Sergel_40 mg.","Tab.Toradolin_10mg.","Tab.Ceveet 250mg","Tab. Prenat_CI.","Qupet Cream"];
+const sample=()=>[
+{id:uid(),t:"pi",data:{no:"2607855662",dd:"21-Nov-26 12:00 PM",name:"Mrs. Chowa.",ad:"21-Nov-26 06:38 PM",gender:"Female",age:"19 Years",cabin:"P-302.",guardian:"Shohag.",rel:"Husband.",addr:"Tarakanda, Mymensingh.",mobile:"01883-487520"}},
+{id:uid(),t:"ot",data:{time:"12:00 PM.",date:"21-Nov-26",ind:"Primi with 38 wks Pregnancy with PROM with FD.",op:"LUCS Under SAB.",surg:"Prof. Dr. Rumana Arman. MBBS. MCPS. DGO. PhD (Reproductive Gynecology & Infertility). Trained in IUI. Professor (CC). Head of Dept. M.A. Rashid Hospital United Healthcare.",asst:"Md. Shohag MA.",anes:"Dr. Prity Ranjon Roy. MBBS. BCS. DA(Anesthesia). Consultant. Mymensingh Medical College & Hospital.",child:"None."}},
+{id:uid(),t:"birth",data:{birth:"Alive",baby:"Single",sex:"-",weight:"3.2 kg",inv:"(All Report Supplied with the Patient)."}},
+{id:uid(),t:"rx",data:{items:[{m:"Tab. Anulid_600 mg.",d:"1+0+1",n:"",u:"14 দিন।"},{m:"Cap. Inclox_500mg.",d:"1+1+1+1",n:"",u:"10 দিন।"},{m:"Cap. Sergel_40 mg.",d:"1+0+1",n:"খাওয়ার আগে",u:"14 দিন।"},{m:"Tab.Toradolin_10mg.",d:"1+0+1",n:"ব্যথা হলে, ভরা পেটে",u:"05 দিন।"},{m:"Tab.Ceveet 250mg",d:"1+0+1",n:"চুষে খাবেন",u:"14 দিন।"},{m:"Tab. Prenat_CI.",d:"0+1+0",n:"",u:"02 মাস ।"},{m:"Qupet Cream",d:"",n:"অপারেশনের জায়গায় লাগাবেন দিনে 2 বার",u:"10 দিন ।",inline:1}]}},
+{id:uid(),t:"advice",data:{items:["নিয়মিত ঔষধ সেবন করবেন।","পূর্ণাঙ্গ বিশ্রাম নিবেন …৩০… দিন।","ভারিকাজ করা নিষেধ …৯০… দিন।","০৬ সপ্তাহ স্বামী সহবাস নিষেধ।","বাচ্চাকে ০৬ মাস পর্যন্ত শুধু বুকের দুধ খাওয়াবেন। এরপর সাথে অন্য খাবার দিবেন।","০৬ সপ্তাহ হতে বাচ্চাকে নিয়মিত টিকা দিন।","নিয়মিত পর্যাপ্ত পরিমাণে পানি পান করুন । অতিরিক্ত লবণ খাবেন না। অল্প অল্প হাটাচলা করুন।","ধুমপান নিষেধ( তামাক , বিড়ি , সিগারেট, জর্দ্দা ) ।","ছুটির পরদিন থেকে ব্যান্ডেজ খুলিয়া গোসল করবেন। অপারেশনের স্থান পরিস্কার রাখবেন।","অপারেশনের …১০… দিনপর সেলাই কাটবেন।","কোনো অসুবিধা হলে ছাড়পত্রসহ যোগাযোগ করবেন।","…১৪… দিন পর চেকআপ করাতে আসবেন।"]}},
+{id:uid(),t:"services",data:{items:["আধুনিক জরুরী বিভাগ।","২৪ ঘন্টা ডিউটি ডাক্তার সেবাই নিয়োজিত।","শীততাপ নিয়ন্ত্রিত বিশেষজ্ঞ ডাক্তার চেম্বার।","বিশেষজ্ঞ সার্জন দ্বারা সকল প্রকার অপারেশন করা হয়।","সার্বক্ষনিক ডিপ্লোমা নার্স।","শীততাপ নিয়ন্ত্রিত অপারেশন থিয়েটার।","শীততাপ নিয়ন্ত্রিত পোস্ট অপারেটিভ।","শীততাপ নিয়ন্ত্রিত আধুনিক কেবিন ব্যবস্থা।","ক্যান্সার রোগীদের ক্যামোথেরাপি দেওয়া হয়।"]}}];
+const nowStr=()=>new Date().toLocaleString("en-US",{month:"2-digit",day:"2-digit",year:"numeric",hour:"numeric",minute:"2-digit"}).replace(",","");
+let S=sample(),F={bill:"",by:"Check By.......",role:"Medical Officer",hosp:"Nirapad Specialized Hospital.",print:nowStr()},mode="view",dirty=false,ddEl=null;
+const R=()=>{const r={F};S.forEach(s=>r[s.id]=s.data);return r},getp=k=>k.split(".").reduce((o,p)=>o?.[p],R()),setp=(k,v)=>{const a=k.split("."),l=a.pop();a.reduce((o,p)=>o[p],R())[l]=v};
+const OPT={op:1,surg:1,ind:1,asst:1,anes:1,birth:1,baby:1,sex:1,weight:1,med:1},DT={dd:"dt",ad:"dt"};
+const fs=(k,o)=>f(k)+`<span class="dw"><button class="db" data-opt="${o}" data-k="${k}">▾</button></span>`,fd=(k,m)=>`<span class="f dt" data-k="${k}" data-m="${m}">${esc(getp(k))}</span>`;
+const f=(k,c="")=>`<span class="f ${c}" data-k="${k}">${esc(getp(k))}</span>`,A=(c,l,t,h,st="")=>`<div class="a ${c}" style="left:${l}pt;top:${t}pt;${st}">${h}</div>`;
+const C39=Object.fromEntries("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%*".split("").map((c,i)=>[c,"nnnwwnwnn wnnwnnnnw nnwwnnnnw wnwwnnnnn nnnwwnnnw wnnwwnnnn nnwwwnnnn nnnwnnwnw wnnwnnwnn nnwwnnwnn wnnnnwnnw nnwnnwnnw wnwnnwnnn nnnnwwnnw wnnnwwnnn nnwnwwnnn nnnnnwwnw wnnnnwwnn nnwnnwwnn nnnnwwwnn wnnnnnnww nnwnnnnww wnwnnnnwn nnnnwnnww wnnnwnnwn nnwnwnnwn nnnnnnwww wnnnnnwwn nnwnnnwwn nnnnwnwwn wwnnnnnnw nwwnnnnnw wwwnnnnnn nwnnwnnnw wwnnwnnnn nwwnwnnnn nwnnnnwnw wwnnnnwnn nwwnnnwnn nwnwnwnnn nwnwnnnwn nwnnnwnwn nnnwnwnwn nnnwwnwnn".split(" ")[i]]));
+function bar(v){const t=(v||"").toUpperCase().split("").filter(c=>C39[c]&&c!="*").join("")||"0";let x=0,r="";for(const ch of "*"+t+"*"){const p=C39[ch];for(let i=0;i<9;i++){const w=p[i]=="w"?2.5:1;if(i%2==0)r+=`<rect x="${x}" width="${w}" height="30"/>`;x+=w}x+=1}return `<svg viewBox="0 0 ${x} 30" preserveAspectRatio="none" width="100%" height="100%">${r}</svg>`}
+const star=`<svg viewBox="0 0 10 10"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fb5"/><stop offset="1" stop-color="#f08a24"/></linearGradient></defs><path d="M5 0 6.3 3.7 10 5 6.3 6.3 5 10 3.7 6.3 0 5 3.7 3.7Z" fill="url(#g)"/></svg>`;
+const bill=()=>F.bill||"";
+function blocks(s){const d=s.data,k=x=>s.id+"."+x,o=[],B=(html,gap,e={})=>o.push({html,gap,sec:s.id,...e});
+ if(s.t=="pi"){let h=`<div class="a box" style="left:0;top:0;width:522pt;height:91.5pt"></div>`;
+  [[7.5,"Admission No","no","Discharge Date","dd"],[23.2,"Patient Name","name","Admission Date:","ad"],[39,"Gender","gender","Cabin/Bed","cabin"],[54.9,"Guardian","guardian","Relation","rel"],[70.6,"Address","addr","Mobile","mobile"]].forEach(([t,l1,k1,l2,k2])=>{h+=A("lab",11,t,l1)+A("col",93,t-.6,":")+A("val",106.5,t+1.6,DT[k1]?fd(k(k1),DT[k1]):f(k(k1)))+`<div class="a lab" style="left:295pt;width:100pt;text-align:right;top:${t}pt">${l2}</div>`+A("col",403.5,t-.6,":")+A("val",417.1,t+1.6,DT[k2]?fd(k(k2),DT[k2]):f(k(k2)))});
+  h+=A("lab",194.2,39.3,"Age:","font-size:12pt")+A("val",228.1,40.6,f(k("age")));B(`<div style="position:relative;height:91.5pt">${h}</div>`,0)}
+ if(s.t=="ot"){let h=`<span class="h" style="font-size:11pt">O.T Note</span>`;
+  [["Time","time",1],["Date","date",1],["Indication","ind",1],["Operation Name","op",1],["Surgeon Name","surg",0],["Asst. Surgeon","asst",0],["Anesthesiologist","anes",0],["Child Specialist","child",0]].forEach(([l,x,c])=>h+=`<div class="r"><span class="l">${l}</span><span class="c">:</span><span class="v ${c?"k":""}">${x=="time"?fd(k(x),"time"):x=="date"?fd(k(x),"date"):OPT[x]?fs(k(x),x):f(k(x))}</span></div>`);B(h,9)}
+ if(s.t=="birth"){let h=`<div class="a box" style="left:0;top:0;width:522pt;height:37.5pt"></div>`;
+  [["Birth","birth"],["Baby","baby"],["Sex","sex"],["Weight","weight"]].forEach(([l,x],i)=>{const q=i*130.5;h+=`<div class="a" style="left:${q}pt;width:130.5pt;text-align:center;top:3.7pt;font:bold 11pt var(--cons)">${l}</div><div class="a" style="left:${q}pt;width:130.5pt;text-align:center;top:17.2pt;font:11pt var(--cons)">${fs(k(x),x)}</div>`});
+  B(`<div style="position:relative;height:37.5pt">${h}</div>`,1);B(`<div style="font:bold 12pt/13pt var(--cons)">Investigation: ${f(k("inv"))}</div>`,10,{sub:1})}
+ if(s.t=="rx"){B(`<span class="h">Treatment on Discharge</span>`,5.6,{keep:1,head:1});
+  d.items.forEach((it,i)=>{const p=n=>k(`items.${i}.${n}`);B(it.inline?`<div style="margin-left:72pt;font:bold 12pt/14pt var(--cam)">${fs(p("m"),"med")} <span style="font:bold 10pt var(--nir)">(${f(p("n"))})</span>…${f(p("u"),"u")}</div>`:
+   `<div style="margin-left:72pt;font:bold 12pt/15.1pt var(--cam)">${fs(p("m"),"med")}</div><div style="margin-left:108pt;display:flex;align-items:baseline;font:bold 11pt/13.6pt var(--cam)"><div style="display:flex;align-items:baseline;width:258.6pt"><span style="display:inline-block;width:35pt">${f(p("d"))}</span><span class="ld"></span>${it.n||mode=="edit"?`<span class="note">${f(p("n"))}</span><span class="ld"></span>`:""}</div>${f(p("u"),"u")}</div>`,i?0:5.3,{row:i})})}
+ if(s.t=="advice"||s.t=="services"){B(`<div class="hd">${NM[s.t]}ঃ</div>`,s.t=="advice"?20:24,{keep:1,head:1});d.items.forEach((t,i)=>B(`<div class="li">${star}${f(k("items."+i))}</div>`,0,{row:i}))}
+ return o}
+function render(){const top=(+$("#top").value||280)*.75,FT=835.2-22.5-40.5,LIM=FT-6-(top+62),ms=$("#ms"),all=S.flatMap(blocks);
+ all.forEach((b,i)=>{ms.innerHTML=`<div>${b.html}</div>`;b.h=ms.firstChild.offsetHeight*.75;b.first=!all[i-1]||all[i-1].sec!=b.sec;if(b.first&&i)b.gap+=GAP});
+ const pages=[[]];let y=0;
+ all.forEach((b,i)=>{let c=pages.at(-1),g=c.length?b.gap:0,n=all[i+1],need=g+b.h+(b.keep&&n?n.gap+n.h:0);if(c.length&&y+need>LIM){pages.push(c=[]);y=0;g=0}c.push({b,y:y+g});y+=g+b.h});
+ const bc=l=>`<div class="a ${bill().trim()?"":"ph"}" style="left:${l}pt;top:${top}pt;width:92pt;height:20pt">${bar(bill().trim()?bill():"123456789")}</div><div class="a" style="left:${l}pt;top:${top+22}pt;font:8pt var(--cons);width:92pt;text-align:center">${bill().trim()?f("F.bill"):""}</div>`;
+ const T=L("dc_tpl",{});
+ const secCtl=s=>`<div class="ctl sec"><button data-act="up" data-s="${s.id}">↑</button><button data-act="dn" data-s="${s.id}">↓</button><button data-act="ts" data-s="${s.id}" title="Save as template">💾</button><select data-act="tl" data-s="${s.id}"><option value="">📂</option>${(T[s.t]||[]).map(x=>`<option>${esc(x.name)}</option>`).join("")}</select><button data-act="del" data-s="${s.id}">🗑</button></div>`;
+ const rowCtl=(s,i)=>`<div class="ctl row"><button data-act="ra" data-s="${s.id}" data-i="${i}">＋</button><button data-act="rd" data-s="${s.id}" data-i="${i}">✕</button></div>`;
+ const fo=`${A("",374.5,FT,f("F.by"),"font:italic bold 11pt var(--cam)")}${A("ft",374.5,FT+14.4,f("F.role"))}${A("",374.5,FT+28.2,f("F.hosp"),"font:11pt var(--tnr)")}${A("ft",45,FT+28.9,`Print Time &amp; Date<b style="font:bold 11pt Calibri,sans-serif">:</b> <b style="font:bold 11pt var(--cons)">${fd("F.print","us")}</b>`)}`;
+ const gd=`<div class="gd"><i style="left:0;right:0;top:${top}pt;height:1px"></i><i style="top:0;bottom:0;left:45pt;width:1px"></i><i style="top:0;bottom:0;right:45pt;width:1px"></i><i style="left:0;right:0;bottom:22.5pt;height:1px"></i></div>`;
+ const w=$("#wrap");w.innerHTML=pages.map(pg=>`<div class="pg">${bc(45)}${bc(612-45-92)}<div class="a title" style="top:${top}pt">DISCHARGE CERTIFICATE</div>${pg.map(({b,y})=>{const s=S.find(q=>q.id==b.sec);return `<div class="blk" style="top:${top+62+y}pt">${b.html}${b.first?secCtl(s):""}${b.row!=null?rowCtl(s,b.row):""}</div>`}).join("")}${fo}${gd}</div>`).join("");
+ w.classList.toggle("edit",mode=="edit");if(mode=="edit")w.querySelectorAll(".f:not(.dt)").forEach(e=>e.contentEditable="true");
+ $("#bm").textContent=mode=="edit"?"✓ Save (view mode)":"✎ Edit (or double-click page)";$("#st").textContent=pages.length+" page";const bi=$("#bill");if(document.activeElement!==bi)bi.value=F.bill||"";
+}
+const setMode=m=>{mode=m;render()},msg=t=>{$("#st").textContent=t;$("#pvm").textContent=t||"Print Preview"};
+const w=$("#wrap");
+w.addEventListener("dblclick",()=>{if(mode!="edit")setMode("edit")});
+w.addEventListener("input",e=>{const el=e.target.closest?.(".f");if(el){setp(el.dataset.k,el.innerText.replace(/\n/g," "));dirty=true;if(el.classList.contains("mf"))showDd(el)}});
+w.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.classList?.contains("f")){e.preventDefault();e.target.blur()}});
+w.addEventListener("paste",e=>{if(e.target.closest?.(".f")){e.preventDefault();document.execCommand("insertText",false,e.clipboardData.getData("text").replace(/\n/g," "))}});
+w.addEventListener("focusin",e=>{const el=e.target.closest?.(".mf");if(el)showDd(el)});
+w.addEventListener("focusout",e=>{$("#dd").style.display="none";const el=e.target.closest?.(".mf"),v=el?.innerText.trim();if(v){const m=L("dc_med",MED);if(!m.includes(v)){m.push(v);Sv("dc_med",m)}}
+ if(!dirty)return;dirty=false;const nk=e.relatedTarget?.dataset?.k;setTimeout(()=>{render();if(nk)document.querySelector(`[data-k="${nk}"]`)?.focus()},0)});
+function showDd(el){if(mode!="edit")return;ddEl=el;const q=el.innerText.trim().toLowerCase(),m=L("dc_med",MED).filter(x=>x.toLowerCase().includes(q)).slice(0,8),dd=$("#dd");if(!m.length){dd.style.display="none";return}const r=el.getBoundingClientRect();dd.style.cssText=`display:block;left:${r.left}px;top:${r.bottom+2}px`;dd.innerHTML=m.map(x=>`<div>${esc(x)}</div>`).join("")}
+$("#dd").addEventListener("mousedown",e=>{e.preventDefault();const t=e.target.closest("div");if(!t||t.id=="dd"||!ddEl)return;setp(ddEl.dataset.k,t.textContent);dirty=false;$("#dd").style.display="none";render()});
+w.addEventListener("click",e=>{const b=e.target.closest("button[data-act]");if(!b)return;const id=b.dataset.s,i=S.findIndex(s=>s.id==id),s=S[i],a=b.dataset.act,n=+b.dataset.i;
+ if(a=="up"&&i>0)[S[i-1],S[i]]=[S[i],S[i-1]];if(a=="dn"&&i<S.length-1)[S[i+1],S[i]]=[S[i],S[i+1]];if(a=="del")S.splice(i,1);
+ if(a=="ts"){const T=L("dc_tpl",{}),nm=$("#tn").value.trim()||NM[s.t];T[s.t]=(T[s.t]||[]).filter(x=>x.name!=nm).concat({name:nm,data:JSON.parse(JSON.stringify(s.data))});Sv("dc_tpl",T);msg("Template saved: "+nm)}
+ if(a=="ra")s.data.items.splice(n+1,0,s.t=="rx"?{m:"",d:"",n:"",u:""}:"");if(a=="rd"){s.data.items.splice(n,1);if(!s.data.items.length)s.data.items.push(s.t=="rx"?{m:"",d:"",n:"",u:""}:"")}
+ render()});
+w.addEventListener("change",e=>{const b=e.target.closest("select[data-act=tl]");if(!b||!b.value)return;const s=S.find(q=>q.id==b.dataset.s),x=(L("dc_tpl",{})[s.t]||[]).find(q=>q.name==b.value);if(x){s.data=JSON.parse(JSON.stringify(x.data));render()}});
+$("#bm").onclick=()=>setMode(mode=="edit"?"view":"edit");$("#top").oninput=render;$("#bill").oninput=e=>{F.bill=e.target.value;render()};
+Object.keys(NM).forEach(t=>$("#addT").add(new Option(NM[t],t)));
+$("#addT").onchange=e=>{if(!e.target.value)return;S.push({id:uid(),t:e.target.value,data:DEF[e.target.value]()});e.target.value="";mode="edit";render()};
+const fillDocs=()=>{const d=L("dc_docs",{}),o=$("#od");o.innerHTML="<option value=''>📂 Open…</option>"+Object.keys(d).map(n=>`<option>${esc(n)}</option>`).join("")};
+$("#sd").onclick=()=>{const nm=$("#dn").value.trim()||S.find(s=>s.t=="pi")?.data.name||"Untitled",d=L("dc_docs",{});d[nm]=JSON.parse(JSON.stringify({S,F}));Sv("dc_docs",d);fillDocs();msg("Saved: "+nm);setMode("view")};
+$("#od").onchange=e=>{const x=L("dc_docs",{})[e.target.value];if(x){S=x.S;F=x.F;$("#dn").value=e.target.value;setMode("view")}};
+$("#nw").onclick=()=>{S=["pi","ot","birth","rx","advice","services"].map(t=>({id:uid(),t,data:DEF[t]()}));F.print=nowStr();F.bill="";$("#dn").value="";setMode("edit")};
+$("#pr").onclick=()=>{mode="view";render();try{print()}catch(e){msg("Print blocked here – open in a new tab")}};
+$("#gd").onchange=e=>w.classList.toggle("guides",e.target.checked);
+let pf=0;addEventListener("beforeprint",()=>{pf=1});
+const stdHTML=()=>{const c=$("#wrap").cloneNode(true);c.querySelectorAll(".ctl,.gd").forEach(e=>e.remove());c.querySelectorAll("[contenteditable]").forEach(e=>e.removeAttribute("contenteditable"));c.style.zoom=1;c.className="wrap";
+ return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc($("#dn").value||"Discharge Certificate")}</title><style>${document.querySelector("style").textContent}body{background:#fff}.wrap{padding:0}</style></head><body>${c.outerHTML}<script>onload=()=>setTimeout(()=>print(),400)<\/script></body></html>`};
+const dl=h=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=(($("#dn").value||"discharge").replace(/[^\w\u0980-\u09FF-]+/g,"_"))+".html";document.body.appendChild(a);a.click();a.remove();msg("HTML ডাউনলোড হয়েছে – ফাইলটা খুলে Ctrl+P দিন")};
+const printDoc=()=>{pf=0;try{print()}catch(e){}
+ setTimeout(()=>{if(pf)return;const h=stdHTML();let w2=null;try{w2=open("","_blank")}catch(e){}
+  if(w2){w2.document.write(h);w2.document.close();msg("নতুন window খুলেছে – সেখানে Ctrl+P দিন")}else dl(h)},900)};
+$("#pr").onclick=()=>{document.body.classList.add("pv");mode="view";w.classList.remove("guides");$("#gd").checked=false;render();scrollTo(0,0);msg("Print Preview – 🖨 Print চাপুন")};
+$("#pvb").onclick=()=>{document.body.classList.remove("pv");msg("")};
+$("#pvp").onclick=printDoc;$("#pvd").onclick=()=>dl(stdHTML());
+const MO="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" "),p2=n=>String(n).padStart(2,"0"),qa=s=>esc(s).replace(/"/g,"&quot;");
+const tm=(t,pad)=>{const[h,mi]=t.split(":").map(Number),h12=(h%12)||12;return `${pad?p2(h12):h12}:${p2(mi)} ${h<12?"AM":"PM"}`};
+const fmtDT=(v,m)=>{if(m=="time")return tm(v,1)+".";const[d,t]=v.split("T"),[y,mo,da]=d.split("-").map(Number);let o=m=="us"?`${p2(mo)}/${p2(da)}/${y}`:`${p2(da)}-${MO[mo-1]}-${String(y).slice(2)}`;if(t&&m!="date")o+=" "+tm(t,m!="us");return o};
+const seedOpts=()=>{const[,ot,bi]=sample(),o={};["op","surg","ind","asst","anes"].forEach(x=>o[x]=[ot.data[x]]);["birth","baby","sex","weight"].forEach(x=>o[x]=[bi.data[x]]);o.med=[...MED];return o};
+const getOpts=()=>L("dc_opts",null)||seedOpts();
+const closePop=()=>{$("#pop").style.display="none"};
+function openPop(html,el){const r=el.getBoundingClientRect(),p=$("#pop");p.innerHTML=html;p.style.cssText=`display:block;left:${Math.max(4,Math.min(r.left,innerWidth-270))}px;top:${r.bottom+4}px`}
+function openOpt(b){const key=b.dataset.opt,k=b.dataset.k;openPop(`<input id="ps" placeholder="🔍 Search…"><div id="pl"></div><div id="pa"><button id="pn">＋ Add new</button></div>`,b);
+ const draw=()=>{const q=$("#ps").value.toLowerCase();$("#pl").innerHTML=(getOpts()[key]||[]).filter(x=>x.toLowerCase().includes(q)).map(x=>`<div data-v="${qa(x)}">${esc(x)}</div>`).join("")||"<i style='padding:5px 8px;display:block;opacity:.7'>No match</i>"};
+ draw();$("#ps").oninput=draw;$("#ps").focus();
+ $("#pl").onclick=e=>{const d=e.target.closest("[data-v]");if(d){setp(k,d.dataset.v);closePop();render()}};
+ $("#pn").onclick=()=>{$("#pa").innerHTML=`<input id="pv" placeholder="New value"><button id="pk">Save</button>`;$("#pv").focus();
+  const sv=()=>{const v=$("#pv").value.trim();if(!v)return;const o=getOpts();(o[key]=o[key]||[]).includes(v)||o[key].push(v);Sv("dc_opts",o);setp(k,v);closePop();render()};$("#pk").onclick=sv;$("#pv").onkeydown=e=>{if(e.key=="Enter")sv()}}}
+function openDate(d){const m=d.dataset.m,k=d.dataset.k;openPop(`<input id="pd" type="${m=="time"?"time":m=="date"?"date":"datetime-local"}"><div id="pa"><button id="pc">Clear</button></div>`,d);
+ const pd=$("#pd");try{pd.showPicker()}catch(e){}pd.onchange=()=>{if(pd.value){setp(k,fmtDT(pd.value,m));closePop();render()}};$("#pc").onclick=()=>{setp(k,"");closePop();render()}}
+w.addEventListener("click",e=>{const b=e.target.closest(".db");if(b){openOpt(b);return}const d=e.target.closest(".dt");if(d&&mode=="edit")openDate(d)});
+addEventListener("mousedown",e=>{if(!e.target.closest("#pop,.db,.dt"))closePop()});
+const gate=()=>{$("#lg").style.display=L("dc_auth",0)?"none":"flex"};
+$("#lgb").onclick=()=>{if($("#le").value.trim()=="admin@gmail.com"&&$("#lp").value=="12345678"){Sv("dc_auth",1);$("#lm").textContent="";gate()}else $("#lm").textContent="ইমেইল বা পাসওয়ার্ড ভুল"};
+$("#lp").onkeydown=e=>{if(e.key=="Enter")$("#lgb").click()};$("#lo").onclick=()=>{Sv("dc_auth",0);gate()};gate();
+const fit=()=>{w.style.zoom=Math.min(1,(innerWidth-16)/816)};addEventListener("resize",fit);fit();fillDocs();render();
+</script>
+</body>
+</html>
