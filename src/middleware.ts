@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
   // If user is on /login and is already authenticated, redirect to /editor
   if (pathname === "/login") {
     if (isAuthenticated) {
-      return NextResponse.redirect(new URL("/editor", req.url));
+      return NextResponse.redirect(new URL("/editor", req.nextUrl));
     }
     return NextResponse.next();
   }
@@ -55,7 +55,7 @@ export async function middleware(req: NextRequest) {
 
   // For protected pages
   if (!isAuthenticated && pathname !== "/login") {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   return NextResponse.next();

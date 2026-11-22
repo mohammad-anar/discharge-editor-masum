@@ -58,7 +58,7 @@ export default function EditorToolbar({
     try {
       await logout().unwrap();
       toast.success("Logged out successfully");
-      router.push("/login");
+      window.location.href = "/login";
     } catch {
       toast.error("Logout failed");
     }

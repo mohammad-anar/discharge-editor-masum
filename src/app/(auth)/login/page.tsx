@@ -7,8 +7,8 @@ import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const [login, { isLoading }] = useLoginMutation();
@@ -20,8 +20,8 @@ export default function LoginPage() {
     try {
       await login({ email: email.trim(), password }).unwrap();
       toast.success("Login successful");
-      router.push("/editor");
-      router.refresh();
+      // Use window.location.href for a clean full page navigation with updated session cookies
+      window.location.href = "/editor";
     } catch (err: any) {
       console.error("Login failed:", err);
       const msg = err?.data?.error || "ইমেইল বা পাসওয়ার্ড ভুল (Invalid email or password)";
@@ -67,17 +67,11 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="w-full py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors cursor-pointer"
           >
             {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
-
-        <div className="text-[11px] opacity-70 text-center mt-1">
-          Default Admin: <b>admin@gmail.com</b> / <b>12345678</b>
-          <br />
-          (Secured with JWT HttpOnly Cookie &amp; MongoDB Atlas)
-        </div>
       </div>
     </div>
   );
