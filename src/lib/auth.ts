@@ -1,5 +1,4 @@
 import { SignJWT, jwtVerify } from "jose";
-import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 import { AuthUser } from "@/types/auth";
@@ -8,18 +7,8 @@ const JWT_SECRET_STRING = process.env.AUTH_SECRET || "fallback-secret-at-least-3
 const JWT_SECRET = new TextEncoder().encode(JWT_SECRET_STRING);
 export const COOKIE_NAME = "auth_session";
 
-export async function hashPassword(password: string): Promise<string> {
-  // Store raw password directly as requested
-  return password;
-}
-
-export async function verifyPassword(password: string, hash: string): Promise<boolean> {
-  if (password === hash) return true;
-  try {
-    return await bcrypt.compare(password, hash);
-  } catch {
-    return false;
-  }
+export function verifyPassword(password: string, stored: string): boolean {
+  return password === stored;
 }
 
 export async function createSessionToken(user: AuthUser): Promise<string> {

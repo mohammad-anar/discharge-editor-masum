@@ -1,15 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { loginSchema } from "@/lib/validators";
 import { apiError, apiSuccess } from "@/lib/api-response";
 import prisma from "@/lib/prisma";
-import { createSessionToken, hashPassword, verifyPassword, COOKIE_NAME } from "@/lib/auth";
+import { createSessionToken, verifyPassword, COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const parsed = loginSchema.safeParse(body);
     if (!parsed.success) {
-      return apiError(parsed.error.issues?.[0]?.message || (parsed.error as any).errors?.[0]?.message || "Invalid input", 400);
+      return apiError(
+        parsed.error.issues?.[0]?.message ||
+          (parsed.error as any).errors?.[0]?.message ||
+          "Invalid input",
+        400
+      );
     }
 
     const { email, password } = parsed.data;
@@ -21,12 +26,11 @@ export async function POST(req: NextRequest) {
 
     // Auto-seed default user if database is empty and credentials match original demo
     if (!user && normalizedEmail === "admin@gmail.com") {
-      const passwordHash = await hashPassword("12345678");
       user = await prisma.user.create({
         data: {
           email: normalizedEmail,
           name: "Hospital Admin",
-          passwordHash,
+          passwordHash: "12345678", // raw plain-text password
           role: "admin",
         },
       });
@@ -36,7 +40,7 @@ export async function POST(req: NextRequest) {
       return apiError("ইমেইল বা পাসওয়ার্ড ভুল (Invalid email or password)", 401);
     }
 
-    const isValid = await verifyPassword(password, user.passwordHash);
+    const isValid = verifyPassword(password, user.passwordHash);
     if (!isValid) {
       return apiError("ইমেইল বা পাসওয়ার্ড ভুল (Invalid email or password)", 401);
     }
