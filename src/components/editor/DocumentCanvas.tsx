@@ -340,7 +340,7 @@ export default function DocumentCanvas() {
       <div
         id="ms"
         ref={measuringRef}
-        className="pg"
+        className="no-print"
         style={{
           position: "fixed",
           left: "-9999px",
