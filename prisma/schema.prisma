@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String              @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String              @unique
+  passwordHash String
+  role         String              @default("user")
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  documents    DischargeDocument[]
+  templates    SectionTemplate[]
+  medicines    Medicine[]
+  fieldOptions FieldOption[]
+}
+
+model DischargeDocument {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId         String   @db.ObjectId
+  owner           User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  documentName    String
+  patientName     String
+  admissionNumber String
+  billNumber      String
+  dischargeDate   String
+  sections        Json
+  footer          Json
+  pageSettings    Json
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([ownerId])
+  @@index([patientName])
+  @@index([admissionNumber])
+  @@index([billNumber])
+  @@index([dischargeDate])
+}
+
+model SectionTemplate {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId     String   @db.ObjectId
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name        String
+  sectionType String
+  data        Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([ownerId])
+  @@index([sectionType])
+}
+
+model Medicine {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId        String   @db.ObjectId
+  owner          User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name           String
+  normalizedName String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([ownerId, normalizedName])
+  @@index([ownerId])
+  @@index([normalizedName])
+}
+
+model FieldOption {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId         String   @db.ObjectId
+  owner           User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  category        String
+  value           String
+  normalizedValue String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([ownerId, category, normalizedValue])
+  @@index([ownerId])
+  @@index([category])
+}
