@@ -1,0 +1,309 @@
+/* Document Styles matching legacy-discharge.html */
+
+:root {
+  --cons: Constantia, "Palatino Linotype", Georgia, serif;
+  --cam: Cambria, Caladea, Georgia, serif;
+  --syl: Sylfaen, Georgia, serif;
+  --tnr: "Times New Roman", "Liberation Serif", serif;
+  --alg: Algerian, "Copperplate Gothic Bold", Impact, serif;
+  --nir: "Nirmala UI", "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  --blk: "Arial Black", "Archivo Black", Impact, sans-serif;
+}
+
+.pg, #ms {
+  --cons: Constantia, "Palatino Linotype", Georgia, serif;
+  --cam: Cambria, Caladea, Georgia, serif;
+  --syl: Sylfaen, Georgia, serif;
+  --tnr: "Times New Roman", "Liberation Serif", serif;
+  --alg: Algerian, "Copperplate Gothic Bold", Impact, serif;
+  --nir: "Nirmala UI", "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  --blk: "Arial Black", "Archivo Black", Impact, sans-serif;
+}
+
+/* Standard A4 dimensions: 210mm (~595.28pt) x 297mm (~841.89pt) */
+.pg {
+  position: relative;
+  width: 595.3pt;
+  min-height: 841.9pt;
+  height: 841.9pt;
+  background: #ffffff;
+  color: #000000;
+  margin: 0 auto 24px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.pg *, #ms * {
+  box-sizing: border-box;
+}
+
+#ms {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 505.3pt;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.a {
+  position: absolute;
+  white-space: nowrap;
+  line-height: 1.15;
+}
+
+.blk {
+  position: absolute;
+  left: 45pt;
+  width: 505.3pt;
+}
+
+.title {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 264pt;
+  height: 33pt;
+  border: 1pt solid #000;
+  font: 17pt/31pt var(--blk);
+  text-align: center;
+}
+
+.box {
+  border: 1.4pt dotted #000;
+  border-radius: 8pt;
+}
+
+.lab {
+  font: 11pt var(--cons);
+}
+
+.col {
+  font: bold 12pt "Arial Narrow", Arial, sans-serif;
+}
+
+.val {
+  font: bold 12pt var(--syl);
+}
+
+.h {
+  display: block;
+  font: 12pt/13.2pt var(--alg);
+  text-decoration: underline;
+  text-underline-offset: 2pt;
+}
+
+.r {
+  display: flex;
+  margin-bottom: 0.85pt;
+}
+
+.r .l {
+  flex: 0 0 99.9pt;
+  font: bold 11pt/12.65pt var(--cons);
+}
+
+.r .c {
+  flex: 0 0 13.5pt;
+  font: bold 9.5pt/12.65pt Helvetica, Arial, sans-serif;
+}
+
+.r .v {
+  flex: 1;
+  font: bold 11pt/12.65pt var(--tnr);
+}
+
+.r .v.k {
+  font-family: var(--cons);
+}
+
+.ld {
+  flex: 1;
+  border-bottom: 1.2pt dotted #000;
+  height: 0.75em;
+  margin: 0 3pt;
+}
+
+.note {
+  font: 11pt var(--nir);
+}
+
+.u {
+  font: bold 11pt var(--cam), var(--nir);
+  font-family: var(--cam), var(--nir);
+}
+
+.hd {
+  font: bold 12pt/14pt var(--nir);
+}
+
+.li {
+  position: relative;
+  padding-left: 36pt;
+  font: 9pt/14pt var(--nir);
+  min-height: 14pt;
+}
+
+.li svg {
+  position: absolute;
+  left: 17.6pt;
+  top: 3.5pt;
+  width: 7pt;
+  height: 7pt;
+}
+
+.ft {
+  font: 11pt var(--syl);
+}
+
+/* Toolbar and Navbar selects */
+.bar select,
+.bar select option {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Edit Mode Styles */
+.dw {
+  display: none;
+}
+
+.edit .dw {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.db {
+  position: absolute;
+  left: 3px;
+  top: -12px;
+  font: 10px/14px system-ui;
+  padding: 0 4px;
+  border: 1px solid #8886;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #111111;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.edit .dt {
+  cursor: pointer;
+  outline: 1px dashed #f59e0baa;
+}
+
+.ctl {
+  display: none;
+  position: absolute;
+  z-index: 8;
+  gap: 2px;
+}
+
+.edit .ctl {
+  display: flex;
+}
+
+.ctl.sec {
+  right: 0;
+  top: -24px;
+}
+
+.ctl.row {
+  left: 100%;
+  margin-left: 6pt;
+  top: 0;
+}
+
+.ctl button, .ctl select {
+  padding: 0 5px;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #8886;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.edit .f {
+  outline: 1px dashed #3b82f688;
+  border-radius: 2px;
+}
+
+.edit .f:empty {
+  background: #3b82f622;
+  padding: 0 12pt;
+}
+
+.edit .f:empty::before {
+  content: "\200b";
+}
+
+/* Guide Lines */
+.gd {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+  z-index: 9;
+}
+
+.guides .gd {
+  display: block;
+}
+
+.gd i {
+  position: absolute;
+  background: #e11d48aa;
+}
+
+/* Barcode placeholder when empty */
+.ph {
+  opacity: 0.3;
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+  
+  html, body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .no-print,
+  .bar,
+  #pvbar,
+  .ctl,
+  .gd,
+  #dd,
+  #pop,
+  #lg,
+  .dw,
+  .footer-safe-area {
+    display: none !important;
+  }
+  
+  .wrap {
+    padding: 0 !important;
+    zoom: 1 !important;
+  }
+  
+  .pg {
+    margin: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .ph {
+    visibility: hidden !important;
+  }
+}
