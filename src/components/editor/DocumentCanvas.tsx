@@ -370,15 +370,15 @@ export default function DocumentCanvas() {
             {sec.t === "rx" && (
               <div>
                 <div data-measure-key="rx_head">
-                  <span className="h mb-2" style={{ fontSize: "12pt" }}>
+                  <span className="h mb-0.5" style={{ fontSize: "11pt" }}>
                     Treatment on Discharge
                   </span>
                 </div>
                 {((sec.data as any).items || []).map((it: any, i: number) => (
-                  <div key={i} data-measure-key={`rx_item_${sec.id}_${i}`} className="my-1">
+                  <div key={i} data-measure-key={`rx_item_${sec.id}_${i}`} className="my-0.5">
                     {it.inline ? (
                       <div
-                        className="font-bold text-[12pt] leading-[14pt]"
+                        className="font-bold text-[11pt] leading-[12.5pt]"
                         style={{ marginLeft: "72pt", fontFamily: "var(--cam)" }}
                       >
                         {it.m} <span style={{ fontFamily: "var(--nir)" }}>({it.n})</span>…{it.u}
@@ -386,13 +386,13 @@ export default function DocumentCanvas() {
                     ) : (
                       <div>
                         <div
-                          className="font-bold text-[12pt] leading-[15.1pt]"
+                          className="font-bold text-[11pt] leading-[12.5pt]"
                           style={{ marginLeft: "72pt", fontFamily: "var(--cam)" }}
                         >
                           {it.m}
                         </div>
                         <div
-                          className="flex items-baseline font-bold text-[11pt] leading-[13.6pt]"
+                          className="flex items-baseline font-bold text-[10pt] leading-[11.5pt]"
                           style={{ marginLeft: "108pt", fontFamily: "var(--cam)" }}
                         >
                           <div className="flex items-baseline w-[258.6pt]">
@@ -412,7 +412,7 @@ export default function DocumentCanvas() {
             {(sec.t === "advice" || sec.t === "services") && (
               <div>
                 <div data-measure-key={`${sec.t}_head`}>
-                  <div className="hd mb-1.5" style={{ fontFamily: "var(--nir)" }}>
+                  <div className="hd mb-0.5" style={{ fontFamily: "var(--nir)" }}>
                     {sec.t === "advice" ? "উপদেশঃ" : "আমাদের সেবা-সমূহঃ"}
                   </div>
                 </div>

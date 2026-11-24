@@ -10,7 +10,8 @@
   --blk: "Arial Black", "Archivo Black", Impact, sans-serif;
 }
 
-.pg, #ms {
+.pg,
+#ms {
   --cons: Constantia, "Palatino Linotype", Georgia, serif;
   --cam: Cambria, Caladea, Georgia, serif;
   --syl: Sylfaen, Georgia, serif;
@@ -34,7 +35,8 @@
   box-sizing: border-box;
 }
 
-.pg *, #ms * {
+.pg *,
+#ms * {
   box-sizing: border-box;
 }
 
@@ -71,46 +73,46 @@
 
 .box {
   border: 1.4pt dotted #000;
-  border-radius: 8pt;
+  border-radius: 6pt;
 }
 
 .lab {
-  font: 11pt var(--cons);
+  font: 10.5pt var(--cons);
 }
 
 .col {
-  font: bold 12pt "Arial Narrow", Arial, sans-serif;
+  font: bold 11.5pt "Arial Narrow", Arial, sans-serif;
 }
 
 .val {
-  font: bold 12pt var(--syl);
+  font: bold 11.5pt var(--syl);
 }
 
 .h {
   display: block;
-  font: 12pt/13.2pt var(--alg);
+  font: 10.5pt/11pt var(--alg);
   text-decoration: underline;
-  text-underline-offset: 2pt;
+  text-underline-offset: 1.5pt;
 }
 
 .r {
   display: flex;
-  margin-bottom: 0.85pt;
+  margin-bottom: 0.2pt;
 }
 
 .r .l {
   flex: 0 0 99.9pt;
-  font: bold 11pt/12.65pt var(--cons);
+  font: bold 10.5pt/11.5pt var(--cons);
 }
 
 .r .c {
   flex: 0 0 13.5pt;
-  font: bold 9.5pt/12.65pt Helvetica, Arial, sans-serif;
+  font: bold 9pt/11.5pt Helvetica, Arial, sans-serif;
 }
 
 .r .v {
   flex: 1;
-  font: bold 11pt/12.65pt var(--tnr);
+  font: bold 10.5pt/11.5pt var(--tnr);
 }
 
 .r .v.k {
@@ -120,40 +122,40 @@
 .ld {
   flex: 1;
   border-bottom: 1.2pt dotted #000;
-  height: 0.75em;
-  margin: 0 3pt;
+  height: 0.55em;
+  margin: 0 2pt;
 }
 
 .note {
-  font: 11pt var(--nir);
+  font: 10.5pt var(--nir);
 }
 
 .u {
-  font: bold 11pt var(--cam), var(--nir);
+  font: bold 10.5pt var(--cam), var(--nir);
   font-family: var(--cam), var(--nir);
 }
 
 .hd {
-  font: bold 12pt/14pt var(--nir);
+  font: bold 11pt/12pt var(--nir);
 }
 
 .li {
   position: relative;
-  padding-left: 36pt;
-  font: 9pt/14pt var(--nir);
-  min-height: 14pt;
+  padding-left: 32pt;
+  font: 9pt/11.5pt var(--nir);
+  min-height: 11.5pt;
 }
 
 .li svg {
   position: absolute;
-  left: 17.6pt;
-  top: 3.5pt;
-  width: 7pt;
-  height: 7pt;
+  left: 16pt;
+  top: 2.2pt;
+  width: 6.5pt;
+  height: 6.5pt;
 }
 
 .ft {
-  font: 11pt var(--syl);
+  font: 10.5pt var(--syl);
 }
 
 /* Toolbar and Navbar selects */
@@ -216,7 +218,8 @@
   top: 0;
 }
 
-.ctl button, .ctl select {
+.ctl button,
+.ctl select {
   padding: 0 5px;
   background: #ffffff;
   color: #111111;
@@ -269,8 +272,9 @@
     size: 210mm 297mm;
     margin: 0;
   }
-  
-  html, body {
+
+  html,
+  body {
     background: #ffffff !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -278,7 +282,7 @@
     min-height: auto !important;
     overflow: visible !important;
   }
-  
+
   .no-print,
   #ms,
   .bar,
@@ -294,7 +298,7 @@
   [data-sonner-toast] {
     display: none !important;
   }
-  
+
   .wrap {
     padding: 0 !important;
     margin: 0 !important;
@@ -304,7 +308,7 @@
     min-height: auto !important;
     border: none !important;
   }
-  
+
   .pg {
     margin: 0 !important;
     padding: 0 !important;
@@ -327,7 +331,7 @@
     break-after: auto !important;
     page-break-after: auto !important;
   }
-  
+
   .ph {
     visibility: hidden !important;
   }

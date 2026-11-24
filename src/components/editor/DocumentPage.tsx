@@ -60,7 +60,7 @@ export default function DocumentPage({
 }: DocumentPageProps) {
   const contentTopPt = topSpacePt + 62;
   const footerTopPt = pageHeightPt - FOOTER_BOTTOM_SPACING_PT - footerHeightPt;
-  const safeAreaTopPt = footerTopPt - SAFE_AREA_PT; // Exactly 50px (37.5pt) above footer
+  const safeAreaTopPt = footerTopPt - SAFE_AREA_PT; // Exactly 60px (45pt) above footer
 
   return (
     <div className={`pg ${isEditMode ? "edit" : ""}`}>
@@ -112,7 +112,7 @@ export default function DocumentPage({
         })}
       </div>
 
-      {/* Reserved 100px (75pt) Footer Safe Area Layer */}
+      {/* Reserved 60px (45pt) Footer Safe Area Layer */}
       <div
         className="footer-safe-area pointer-events-none select-none no-print"
         style={{
@@ -120,13 +120,13 @@ export default function DocumentPage({
           left: "45pt",
           width: "505.3pt",
           top: `${safeAreaTopPt}pt`,
-          height: `${SAFE_AREA_PT}pt`, // 100px safe zone
+          height: `${SAFE_AREA_PT}pt`, // 60px safe zone
           zIndex: 5,
         }}
       >
         {guidesVisible && (
           <div className="w-full h-full border border-dashed border-red-400 bg-red-100/15 flex items-center justify-center text-[10px] text-red-500 font-mono">
-            100px Footer Safe Area (Reserved Buffer)
+            60px Footer Safe Area (Reserved Buffer)
           </div>
         )}
       </div>

@@ -85,8 +85,8 @@ export default function OTNote({ data, onChange, isEditMode }: OTNoteProps) {
   };
 
   return (
-    <div className="w-[505.3pt] my-2 text-black">
-      <span className="h mb-1.5" style={{ fontSize: "11pt" }}>
+    <div className="w-[505.3pt] my-0.5 text-black">
+      <span className="h mb-0.5" style={{ fontSize: "10.5pt" }}>
         O.T Note
       </span>
       {rows.map((row) => (

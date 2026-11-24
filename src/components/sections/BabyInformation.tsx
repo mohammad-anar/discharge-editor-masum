@@ -62,10 +62,10 @@ export default function BabyInformation({
   };
 
   return (
-    <div className="w-[505.3pt] my-2 text-black">
+    <div className="w-[505.3pt] my-0.5 text-black">
       {/* 4-column Dotted Box */}
-      <div className="relative w-full h-[37.5pt] mb-2.5">
-        <div className="a box left-0 top-0 w-full h-[37.5pt]" />
+      <div className="relative w-full h-[28pt] mb-1">
+        <div className="a box left-0 top-0 w-full h-[28pt]" />
         {columns.map((col, i) => {
           const leftPt = i * colWidthPt;
           return (
@@ -75,8 +75,8 @@ export default function BabyInformation({
                 style={{
                   left: `${leftPt}pt`,
                   width: `${colWidthPt}pt`,
-                  top: "3.7pt",
-                  font: "bold 11pt var(--cons)",
+                  top: "2pt",
+                  font: "bold 10pt var(--cons)",
                 }}
               >
                 {col.label}
@@ -86,8 +86,8 @@ export default function BabyInformation({
                 style={{
                   left: `${leftPt}pt`,
                   width: `${colWidthPt}pt`,
-                  top: "17.2pt",
-                  font: "11pt var(--cons)",
+                  top: "13.5pt",
+                  font: "10.5pt var(--cons)",
                 }}
               >
                 {renderColValue(col.field, col.category)}
@@ -99,7 +99,7 @@ export default function BabyInformation({
 
       {/* Investigation Text */}
       <div
-        className="font-bold text-[12pt] leading-[13pt]"
+        className="font-bold text-[10.5pt] leading-[11.5pt]"
         style={{ fontFamily: "var(--cons)" }}
       >
         Investigation:{" "}

@@ -17,12 +17,12 @@ export interface PaginatedPage {
   safeAreaHeightPt: number;
 }
 
-// 100px at 96 DPI: 100 * 0.75 = 75pt (50px + 50px additional safe area)
-export const SAFE_AREA_PX = 100;
-export const SAFE_AREA_PT = 75;
+// 60px at 96 DPI: 60 * 0.75 = 45pt
+export const SAFE_AREA_PX = 60;
+export const SAFE_AREA_PT = 45;
 export const FOOTER_BOTTOM_SPACING_PT = 22.5; // 30px
 export const DEFAULT_FOOTER_HEIGHT_PT = 40.5; // ~54px
-export const GAP_PT = 8; // Extra gap between different sections
+export const GAP_PT = 2; // Minimal gap between different sections
 
 export function useDocumentPagination(
   sections: DocumentSection[],
@@ -67,7 +67,7 @@ export function useDocumentPagination(
       const gap = currentSections.length > 0 ? GAP_PT : 0;
 
       if (section.t === "pi") {
-        const height = getH("pi", 91.5);
+        const height = getH("pi", 73.5);
         if (currentSections.length > 0 && currentY + gap + height > LIM) {
           pushPage();
         }
@@ -78,7 +78,7 @@ export function useDocumentPagination(
         });
         currentY += (currentSections.length === 1 ? 0 : gap) + height;
       } else if (section.t === "ot") {
-        const height = getH("ot", 135);
+        const height = getH("ot", 105);
         if (currentSections.length > 0 && currentY + gap + height > LIM) {
           pushPage();
         }
@@ -89,7 +89,7 @@ export function useDocumentPagination(
         });
         currentY += (currentSections.length === 1 ? 0 : gap) + height;
       } else if (section.t === "birth") {
-        const height = getH("birth", 58);
+        const height = getH("birth", 42);
         if (currentSections.length > 0 && currentY + gap + height > LIM) {
           pushPage();
         }
@@ -101,13 +101,13 @@ export function useDocumentPagination(
         currentY += (currentSections.length === 1 ? 0 : gap) + height;
       } else if (section.t === "rx") {
         const items = (section.data as any).items || [];
-        const headH = getH("rx_head", 25);
+        const headH = getH("rx_head", 15);
         let itemIndex = 0;
 
         // If we can't fit header + first item on current page, push to next page
         const firstItemH = items[0]
-          ? getH(`rx_item_${section.id}_0`, items[0].inline ? 20 : 28)
-          : 28;
+          ? getH(`rx_item_${section.id}_0`, items[0].inline ? 14 : 24)
+          : 24;
 
         if (currentSections.length > 0 && currentY + gap + headH + firstItemH > LIM) {
           pushPage();
@@ -124,7 +124,7 @@ export function useDocumentPagination(
             const it = items[itemIndex];
             const itemH = getH(
               `rx_item_${section.id}_${itemIndex}`,
-              it.inline ? 20 : 28
+              it.inline ? 14 : 24
             );
 
             // If adding this item would breach the 50px safe boundary above footer
@@ -158,12 +158,12 @@ export function useDocumentPagination(
         }
       } else if (section.t === "advice" || section.t === "services") {
         const items = (section.data as any).items || [];
-        const headH = getH(`${section.t}_head`, 25);
+        const headH = getH(`${section.t}_head`, 14);
         let itemIndex = 0;
 
         const firstItemH = items[0]
-          ? getH(`${section.t}_item_${section.id}_0`, 16)
-          : 16;
+          ? getH(`${section.t}_item_${section.id}_0`, 12)
+          : 12;
 
         if (currentSections.length > 0 && currentY + gap + headH + firstItemH > LIM) {
           pushPage();
@@ -180,7 +180,7 @@ export function useDocumentPagination(
             const it = items[itemIndex];
             const itemH = getH(
               `${section.t}_item_${section.id}_${itemIndex}`,
-              16
+              12
             );
 
             if (pageItems.length > 0 && currentY + batchH + itemH > LIM) {

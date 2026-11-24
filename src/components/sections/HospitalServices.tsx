@@ -47,14 +47,14 @@ export default function HospitalServices({
   };
 
   return (
-    <div className="w-[505.3pt] my-2 text-black">
+    <div className="w-[505.3pt] my-0.5 text-black">
       {isFirstSlice && (
-        <div className="hd mb-1.5" style={{ fontFamily: "var(--nir)" }}>
+        <div className="hd mb-0.5" style={{ fontFamily: "var(--nir)" }}>
           আমাদের সেবা-সমূহঃ
         </div>
       )}
 
-      <div className="space-y-0.5">
+      <div className="space-y-0">
         {visibleItems.map((item, localIdx) => (
           <div key={localIdx} className="relative li">
             <StarIcon />

@@ -54,14 +54,14 @@ export default function Treatment({
   };
 
   return (
-    <div className="w-[505.3pt] my-2 text-black">
+    <div className="w-[505.3pt] my-0.5 text-black">
       {isFirstSlice && (
-        <span className="h mb-2" style={{ fontSize: "12pt" }}>
+        <span className="h mb-0.5" style={{ fontSize: "11pt" }}>
           Treatment on Discharge
         </span>
       )}
 
-      <div className={`space-y-1.5 ${isFirstSlice ? "mt-2" : "mt-0"}`}>
+      <div className={`space-y-0.5 ${isFirstSlice ? "mt-1" : "mt-0"}`}>
         {visibleItems.map((it, localIdx) => (
           <div key={localIdx} className="relative group">
             {/* Row Controls on right in Edit Mode */}
@@ -95,7 +95,7 @@ export default function Treatment({
             {it.inline ? (
               /* Inline layout (e.g. creams, ointments) */
               <div
-                className="font-bold text-[12pt] leading-[14pt]"
+                className="font-bold text-[11pt] leading-[12.5pt]"
                 style={{ marginLeft: "72pt", fontFamily: "var(--cam)" }}
               >
                 <MedicineCombobox
@@ -104,7 +104,7 @@ export default function Treatment({
                   isEditMode={isEditMode}
                 />{" "}
                 <span
-                  className="font-bold text-[10pt]"
+                  className="font-bold text-[9.5pt]"
                   style={{ fontFamily: "var(--nir)" }}
                 >
                   (
@@ -156,7 +156,7 @@ export default function Treatment({
               /* Standard two-line layout with dotted leader line */
               <div>
                 <div
-                  className="font-bold text-[12pt] leading-[15.1pt]"
+                  className="font-bold text-[11pt] leading-[12.5pt]"
                   style={{ marginLeft: "72pt", fontFamily: "var(--cam)" }}
                 >
                   <MedicineCombobox
@@ -166,7 +166,7 @@ export default function Treatment({
                   />
                 </div>
                 <div
-                  className="flex items-baseline font-bold text-[11pt] leading-[13.6pt]"
+                  className="flex items-baseline font-bold text-[10pt] leading-[11.5pt]"
                   style={{ marginLeft: "108pt", fontFamily: "var(--cam)" }}
                 >
                   <div className="flex items-baseline w-[258.6pt]">
